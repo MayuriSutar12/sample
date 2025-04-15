@@ -1,0 +1,60 @@
+
+spring:
+  batch:
+    jdbc:
+      initialize-schema: always
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:3.109.253.210:3306}/qbank_production_db?zeroDateTimeBehavior=convertToNull
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:CDRR00t}
+    hikari:
+      connection-timeout: 40000
+      minimum-idle: 10
+      maximum-pool-size: 50
+      idle-timeout: 120000
+      max-lifetime: 30000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: com.example.demo.CustomNamingStrategy
+  application:
+    name: demo
+
+  security:
+    enabled: false
+    user:
+      password: none
+      name: none
+
+  # File configuration
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+# Port number
+server:
+  port: 8085
+open-api-server:
+  url: ${OPEN_API_URL:http://13.202.253.67:8085/}
+batch:
+  limit: 1500
+  chunk-size: 1
+
+api:
+  solution-url: "http://13.202.253.67:5000/getSolution"
+
+# Log file
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+
+springdoc:
+  api-docs:
+    enabled: true
